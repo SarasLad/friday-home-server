@@ -1,5 +1,5 @@
 [Unit]
-Description=friday resource watchdog
+Description=server resource watchdog
 
 [Service]
 Type=oneshot
