@@ -40,23 +40,19 @@ Goals:
 
 ## Mail / SMTP Setup (msmtp)
 
-friday uses a dedicated Gmail account for alerts:
-- 2‑Step Verification enabled  
-- App Password generated for SMTP  
-- `/etc/msmtprc` configured to use `smtp.gmail.com:587` with TLS
+friday uses a dedicated email account for sending alerts, configured as an SMTP relay through msmtp. Authentication is done with an app-specific password, and the SMTP server is accessed over TLS on port 587 using a minimal /etc/msmtprc configuration.
 
 ## Boot Health Mail
 
-- Service: `systemd/friday-boot-mail.service`
-- Script: `scripts/friday-boot-mail.sh`
+- Service: `systemd/boot-mail.service`
+- Script: `scripts/boot-mail.sh`
 - Runs once on every boot (after network is online) and sends a detailed health snapshot
   including uptime, load, memory, disk `/`, IP addresses, and sensor data.
 
 ## Resource Watchdog
 
-- Service: `systemd/friday-watchdog.service`
-- Timer: `systemd/friday-watchdog.timer`
-- Script: `scripts/friday-watchdog.sh`
+- Service: `systemd/watchdog.service`
+- Timer: `systemd/watchdog.timer`
+- Script: `scripts/watchdog.sh`
 - Runs hourly (first run a few minutes after boot) and checks CPU, RAM, disk, and
   temperature thresholds; sends an email only if any metric is above its limit.
-
